@@ -38,7 +38,7 @@
 #include <EthernetServer.h>
 #else
 
-#define pgm_read_byte(x) (*((uint8_t*)x))
+// #define pgm_read_byte(x) (*((uint8_t*)x))
 
 #endif
 
@@ -690,9 +690,9 @@ void WebServer::processConnection(char *buff, int *bufflen)
 
 bool WebServer::checkCredentials(const char authCredentials[45])
 {
-  char basic[7] = "Basic ";
-  if((0 == strncmp(m_authCredentials,basic,6)) &&
-     (0 == strcmp(authCredentials, m_authCredentials + 6))) return true;
+  char basic[8] = "Bearer ";
+  if((0 == strncmp(m_authCredentials,basic,7)) &&
+     (0 == strcmp(authCredentials, m_authCredentials + 7))) return true;
   return false;
 }
 
